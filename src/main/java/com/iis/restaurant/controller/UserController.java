@@ -1,5 +1,5 @@
 package com.iis.restaurant.controller;
-// saaam
+
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.iis.restaurant.model.User;
 import com.iis.restaurant.service.UserService;
 
-// Primer kontrolera cijim metodama mogu pristupiti samo autorizovani korisnici
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
@@ -26,10 +25,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	// Za pristup ovoj metodi neophodno je da ulogovani korisnik ima ADMIN ulogu
-	// Ukoliko nema, server ce vratiti gresku 403 Forbidden
-	// Korisnik jeste autentifikovan, ali nije autorizovan da pristupi resursu
-	@GetMapping("/user/{userId}")
 	@PreAuthorize("hasRole('ADMIN')")	
 	public User loadById(@PathVariable Long userId) {
 		return this.userService.findById(userId);
