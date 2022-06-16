@@ -6,8 +6,12 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Manager extends User {
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "manager")
 	private Set<Restaurant> restaurants = new HashSet<Restaurant>();
 

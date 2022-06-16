@@ -6,15 +6,20 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Client extends User {
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	Set<TableReservation> tableReservations = new HashSet<TableReservation>();
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	Set<Rating> ratings = new HashSet<Rating>();
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	Set<Comment> comments = new HashSet<Comment>();
 

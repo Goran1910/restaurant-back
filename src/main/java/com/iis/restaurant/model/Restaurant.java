@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.iis.restaurant.dto.RestaurantDTO;
+
 @Entity
 public class Restaurant {
 	@Id
@@ -21,6 +23,8 @@ public class Restaurant {
 
 	@Column(name = "rest_name", length = 30)
 	private String name;
+
+	private String imagePath;
 
 	@OneToMany(mappedBy = "restaurant")
 	Set<TableEntity> tables = new HashSet<TableEntity>();
@@ -35,14 +39,31 @@ public class Restaurant {
 	@OneToMany(mappedBy = "restaurant")
 	Set<Comment> comments = new HashSet<Comment>();
 
-	public Restaurant(int id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
-
 	public Restaurant() {
 		super();
+	}
+
+	public RestaurantDTO toDTO(String username) {
+		float averageRating = this.calculateAverageRating();
+		int clientsRating = this.getClientsRating(username);
+		return new RestaurantDTO(this.name, this.imagePath, averageRating, clientsRating);
+	}
+
+	public float calculateAverageRating() {
+		int sum = 0;
+		for (Rating r : this.ratings) {
+			sum += r.getValue();
+		}
+		return sum / this.ratings.size();
+	}
+
+	public int getClientsRating(String username) {
+		for (Rating r : this.ratings) {
+			if (r.getClient().getUsername().equals(username)) {
+				return r.getValue();
+			}
+		}
+		return 0;
 	}
 
 	public int getId() {
@@ -93,10 +114,18 @@ public class Restaurant {
 		this.comments = comments;
 	}
 
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
 	@Override
 	public String toString() {
-		return "Restaurant [id=" + id + ", name=" + name + ", tables=" + tables + ", manager=" + manager + ", ratings="
-				+ ratings + ", comments=" + comments + "]";
+		return "Restaurant [id=" + id + ", name=" + name + ", imagePath=" + imagePath + ", tables=" + tables
+				+ ", manager=" + manager + ", ratings=" + ratings + ", comments=" + comments + "]";
 	}
 
 }
