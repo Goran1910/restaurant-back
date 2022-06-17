@@ -83,8 +83,15 @@ public class TableReservation {
 
 	@Override
 	public String toString() {
-		return "TableReservation [id=" + id + ", numOfPeople=" + numOfPeople + ", date=" + date + ", table=" + table
-				+ ", client=" + client + "]";
+		return "TableReservation [id=" + id + ", numOfPeople=" + numOfPeople + ", date=" + date + "]";
 	}
+
+//	@Override
+//	public String toString() {
+//		return "TableReservation [id=" + id + ", numOfPeople=" + numOfPeople + ", date=" + date + ", table=" + table
+//				+ ", client=" + client + "]";
+//	}
+	
+	
 
 }

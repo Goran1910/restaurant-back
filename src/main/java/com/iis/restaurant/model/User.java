@@ -35,27 +35,27 @@ public class User implements UserDetails {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	protected Long id;
 
 	@Column(name = "username")
-	private String username;
+	protected String username;
 
 	@JsonIgnore
 	@Column(name = "password")
-	private String password;
+	protected String password;
 
 	@Column(name = "email")
-	private String email;
+	protected String email;
 
 	@Column(name = "enabled")
-	private boolean enabled;
+	protected boolean enabled;
 
 	@Column(name = "last_password_reset_date")
-	private Timestamp lastPasswordResetDate;
+	protected Timestamp lastPasswordResetDate;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	private List<Role> roles;
+	protected List<Role> roles;
 
 	public Long getId() {
 		return id;

@@ -16,11 +16,8 @@ import com.iis.restaurant.dto.RestaurantDTO;
 
 @Entity
 public class Restaurant {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "rest_id")
-	private int id;
 
+	@Id
 	@Column(name = "rest_name", length = 30)
 	private String name;
 
@@ -64,14 +61,6 @@ public class Restaurant {
 			}
 		}
 		return 0;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -124,8 +113,8 @@ public class Restaurant {
 
 	@Override
 	public String toString() {
-		return "Restaurant [id=" + id + ", name=" + name + ", imagePath=" + imagePath + ", tables=" + tables
-				+ ", manager=" + manager + ", ratings=" + ratings + ", comments=" + comments + "]";
+		return "Restaurant [name=" + name + ", imagePath=" + imagePath + ", tables=" + tables + ", manager=" + manager
+				+ ", ratings=" + ratings + ", comments=" + comments + "]";
 	}
 
 }
