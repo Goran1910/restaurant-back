@@ -1,11 +1,17 @@
 package com.iis.restaurant.service.impl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iis.restaurant.dto.DayReservationStat;
 import com.iis.restaurant.dto.RestaurantDTO;
 import com.iis.restaurant.dto.TableReservationRequest;
 import com.iis.restaurant.model.Client;
@@ -25,6 +31,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 	private TableEntityRepository tableEntityRepository;
 	private TableReservationRepository tableReservationRepository;
 	private ClientRepository clientReposiotry; 
+	
+    @PersistenceContext
+    private EntityManager em;
 
 	@Autowired
 	public RestaurantServiceImpl(RestaurantRepository restaurantRepository,
@@ -69,5 +78,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 		reservation.setClient(client);
 		this.tableReservationRepository.save(reservation);
 		return true;
+	}
+	
+	public List<DayReservationStat> getStatsByRestName(String restName) {
+		int prevMonth = this.getPrevMonth();
+		return this.tableReservationRepository.dailyStats(restName, prevMonth);
+	}
+	
+	public int getPrevMonth() {
+		LocalDate localDate = LocalDate.now();
+		return localDate.getMonthValue() - 1;
 	}
 }

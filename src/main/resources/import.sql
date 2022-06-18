@@ -28,7 +28,13 @@ insert into table_entity(capacity, rest_id) values(10, 'Ресторан 1');
 insert into table_entity(capacity, rest_id) values(6, 'Ресторан 2');
 insert into table_entity(capacity, rest_id) values(2, 'Ресторан 2');
 
-insert into table_reservation(num_of_people, reservation_date, table_id, client_id) values (3, '2022-06-15 11:58:58', 1, 1);
+insert into table_reservation(num_of_people, reservation_date, table_id, client_id) values (2, '2022-06-15 11:58:58', 1, 1);
+insert into table_reservation(num_of_people, reservation_date, table_id, client_id) values (2, '2022-05-01 11:58:58', 1, 1);
+insert into table_reservation(num_of_people, reservation_date, table_id, client_id) values (8, '2022-05-05 11:58:58', 3, 1);
+insert into table_reservation(num_of_people, reservation_date, table_id, client_id) values (3, '2022-05-07 11:58:58', 2, 1);
+insert into table_reservation(num_of_people, reservation_date, table_id, client_id) values (1, '2022-05-24 11:58:58', 1, 1);
+insert into table_reservation(num_of_people, reservation_date, table_id, client_id) values (4, '2022-05-15 11:58:58', 4, 1);
+insert into table_reservation(num_of_people, reservation_date, table_id, client_id) values (2, '2022-05-15 11:58:58', 5, 1);
 
 insert into ingredient(ing_name) values ('luk');
 insert into ingredient(ing_name) values ('kupus');

@@ -42,6 +42,7 @@ public class UserController {
 		return this.userService.findByUsername(user.getName());
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/managers")
 	public ResponseEntity<List<ManagerDTO>> getAllManagers(){
 		List<ManagerDTO> managers = this.userService.getAllManagers();
